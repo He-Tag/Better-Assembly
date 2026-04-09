@@ -1,14 +1,22 @@
+ifexec = False
+callexec = 0
 while True:
     result = 0
-    if ifexec == False:
-        cmd = input("BASM>")
-        signalcmd = cmd.split()[0]
-        splitcmd = cmd.split()
-    elif ifexec == True:
+    if ifexec == True:
         cmd = secondhalfcmd
         signalcmd = cmd.split()[0]
         splitcmd = cmd.split()
         ifexec = False
+    elif callexec > 0:
+        cmd = cmdlist[0]
+        signalcmd = cmd.split()[0]
+        splitcmd = cmd.split()
+        del cmdlist[0]
+        callexec = callexec - 1
+    else:
+        cmd = input("BASM>")
+        signalcmd = cmd.split()[0]
+        splitcmd = cmd.split()
     if signalcmd == "ADD":
         try:
             for i in range(len(splitcmd) - 1):
@@ -118,3 +126,9 @@ while True:
             elif globals()[f"{firsthalfcmd[2]}"] == "<=":
                 if globals()[f"{firsthalfcmd[1]}"] <= globals()[f"{firsthalfcmd[3]}"]:
                     ifexec = True
+    elif signalcmd == "DEF":
+        executedcode = cmd.split(":")[1]
+        globals()[f"{splitcmd[1]}"] = executedcode.split(";")
+    elif signalcmd == "CALL":
+        cmdlist = globals()[f"{splitcmd[1]}"]
+        callexec = len(cmdlist)

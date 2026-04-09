@@ -1,2 +1,17 @@
 # Better-Assembly
 Better Assembly or short BASM is an Assembly inspired programming language written in Python.
+
+# Usage:
+For now, there are 11 possible Commands: ADD; SUB; MUL; DIV; EXP; PRC; VARSTR; VARINT; VARFLOAT; VARREAD; IF
+Syntax:
+ADD NUMBER NUMBER
+SUB NUMBER NUMBER
+MUL NUMBER NUMBER
+DIV NUMBER NUMBER
+EXP NUMBER EXPONENT
+PRC NUMBER PERCENTAGE
+VARSTR NAME STRING
+VARINT NAME INTEGER
+VARFLOAT NAME FLOAT
+VARREAD NAME
+IF A (= ! < > <= >=) B: ANY COMMAND

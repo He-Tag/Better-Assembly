@@ -1,3 +1,4 @@
+#Terminal-Mode
 ifexec = False
 callexec = 0
 looploops = 0
@@ -83,77 +84,7 @@ while True:
             result = (splitcmd[1] / 100) * splitcmd[2]
         except:
             result = ({splitcmd[1]} / 100) * {splitcmd[2]}
-        print(result)ifexec = False
-callexec = 0
-while True:
-    result = 0
-    if ifexec == True:
-        cmd = secondhalfcmd
-        signalcmd = cmd.split()[0]
-        splitcmd = cmd.split()
-        ifexec = False
-    elif callexec > 0:
-        cmd = cmdlist[0]
-        signalcmd = cmd.split()[0]
-        splitcmd = cmd.split()
-        del cmdlist[0]
-        callexec = callexec - 1
-    else:
-        cmd = input("BASM>")
-        signalcmd = cmd.split()[0]
-        splitcmd = cmd.split()
-    if signalcmd == "ADD":
-        try:
-            for i in range(len(splitcmd) - 1):
-                splitcmd[i + 1] = float(splitcmd[i + 1])
-            for i in range(len(splitcmd) - 1):
-                exec(f"result += splitcmd[i + 1]")
-        except ValueError:
-            for i in range(len(splitcmd) - 1):
-                exec(f"result += {splitcmd[i + 1]}")
         print(result)
-    elif signalcmd == "SUB":
-        try:
-            for i in range(len(splitcmd) - 1):
-                splitcmd[i + 1] = float(splitcmd[i + 1])
-            result = splitcmd[1]
-            for i in range(len(splitcmd) - 2):
-                exec(f"result -= splitcmd[i + 2]")
-        except ValueError:
-            for i in range(len(splitcmd) - 2):
-                exec(f"result = result + {splitcmd[i + 1]} - {splitcmd[i + 2]}")
-        print(result)
-    elif signalcmd == "MUL":
-        try:
-            for i in range(len(splitcmd) - 1):
-                splitcmd[i + 1] = float(splitcmd[i + 1])
-            for i in range(len(splitcmd) - 1):
-                exec(f"result *= splitcmd[i + 1]")
-        except ValueError:
-            for i in range(len(splitcmd) - 1):
-                exec(f"result *= {splitcmd[i + 1]}")
-        print(result) 
-    elif signalcmd == "DIV":
-        try:
-            for i in range(len(splitcmd) - 1):
-                splitcmd[i + 1] = float(splitcmd[i + 1])
-            result = splitcmd[1]
-            for i in range(len(splitcmd) - 2):
-                exec(f"result /= splitcmd[i + 2]")
-        except ValueError:
-            for i in range(len(splitcmd) - 2):
-                exec(f"result = result + {splitcmd[i + 1]} / {splitcmd[i + 2]}")
-        print(result)
-    elif signalcmd == "EXP":
-        try:
-            for i in range(len(splitcmd) - 1):
-                splitcmd[i + 1] = float(splitcmd[i + 1])
-            result = splitcmd[1] ** splitcmd[2]
-        except ValueError:
-            result = {splitcmd[1]} ** {splitcmd[2]}
-        print(result)
-    elif signalcmd == "PRC":
-
     elif signalcmd == "VARSTR":
         exec(f"{splitcmd[1]} = splitcmd[2]")
     elif signalcmd == "VARINT":

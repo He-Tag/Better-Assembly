@@ -5,7 +5,7 @@ callexec = 0
 looploops = 0
 loopinf = False
 currentline = -1
-with open('yourfilename.txt', 'r') as basmfile:
+with open('basmfile.txt', 'r') as basmfile:
     lines = basmfile.readlines()
     while executingcode == True:
         result = 0

@@ -44,7 +44,6 @@ with open('basmfile.txt', 'r') as basmfile:
             except ValueError:
                 for i in range(len(splitcmd) - 1):
                     exec(f"result += {splitcmd[i + 1]}")
-            print(result)
         elif signalcmd == "SUB":
             try:
                 for i in range(len(splitcmd) - 1):
@@ -55,7 +54,6 @@ with open('basmfile.txt', 'r') as basmfile:
             except ValueError:
                 for i in range(len(splitcmd) - 2):
                     exec(f"result = result + {splitcmd[i + 1]} - {splitcmd[i + 2]}")
-            print(result)
         elif signalcmd == "MUL":
             try:
                 for i in range(len(splitcmd) - 1):
@@ -65,7 +63,6 @@ with open('basmfile.txt', 'r') as basmfile:
             except ValueError:
                 for i in range(len(splitcmd) - 1):
                     exec(f"result *= {splitcmd[i + 1]}")
-            print(result) 
         elif signalcmd == "DIV":
             try:
                 for i in range(len(splitcmd) - 1):
@@ -76,7 +73,6 @@ with open('basmfile.txt', 'r') as basmfile:
             except ValueError:
                 for i in range(len(splitcmd) - 2):
                     exec(f"result = result + {splitcmd[i + 1]} / {splitcmd[i + 2]}")
-            print(result)
         elif signalcmd == "EXP":
             try:
                 for i in range(len(splitcmd) - 1):
@@ -84,7 +80,6 @@ with open('basmfile.txt', 'r') as basmfile:
                 result = splitcmd[1] ** splitcmd[2]
             except ValueError:
                 result = {splitcmd[1]} ** {splitcmd[2]}
-            print(result)
         elif signalcmd == "PRC":
             try:
                 for i in range(len(splitcmd) - 1):
@@ -92,7 +87,6 @@ with open('basmfile.txt', 'r') as basmfile:
                 result = (splitcmd[1] / 100) * splitcmd[2]
             except:
                 result = ({splitcmd[1]} / 100) * {splitcmd[2]}
-            print(result)
         elif signalcmd == "VARSTR":
             exec(f"{splitcmd[1]} = splitcmd[2]")
         elif signalcmd == "VARINT":
@@ -168,4 +162,4 @@ with open('basmfile.txt', 'r') as basmfile:
             try:   
                 globals()[f"{splitcmd[3]}"] = result
             except:
-                pass
+                print(result)

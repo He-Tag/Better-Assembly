@@ -164,3 +164,8 @@ with open('basmfile.txt', 'r') as basmfile:
             executingcode = False
         elif signalcmd == "JMP":
             currentline = (int(splitcmd[1]) - 2)
+        if result != 0:
+            try:   
+                globals()[f"{splitcmd[3]}"] = result
+            except:
+                pass

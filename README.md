@@ -5,7 +5,7 @@ is an Assembly inspired programming language written in Python.
 
 # Usage:
 
-For now, there are 11 possible Commands: ADD; SUB; MUL; DIV; EXP; PRC; VARSTR; VARINT; VARFLOAT; VARREAD; IF
+For now, there are 16 possible Commands: ADD; SUB; MUL; DIV; EXP; PRC; VARSTR; VARINT; VARFLOAT; VARREAD; IF; DEF; CALL; INC; DEC; LOOP
 
 Syntax:
 
@@ -30,3 +30,13 @@ VARFLOAT NAME FLOAT
 VARREAD NAME
 
 IF A (= ! < > <= >=) B: ANY COMMAND
+
+DEF NAME : COMMAND A; COMMAND B; …
+
+CALL NAME
+
+INC NAME
+
+DEC NAME
+
+LOOP NUMBER : ANY COMMAND

@@ -9,7 +9,7 @@ with open('scriptfile.basm', 'r') as basmfile:
     lines = basmfile.readlines()
     while executingcode == True:
         try:
-            result = None
+            result = 0
             if ifexec == True:
                 cmd = secondhalfcmd
                 signalcmd = cmd.split()[0]
@@ -172,11 +172,11 @@ with open('scriptfile.basm', 'r') as basmfile:
             try:   
                 globals()[f"{splitcmd[3]}"] = result
             except:
-                try:
-                    print(int(result))
-                except:
-                        if result != None:
-                            print(result)
+                pass
+            try:
+                print(int(result))
+            except:
+                    print(result)
         except Exception as code_execution_exception:
             print(f"The Program just tried to execute line {currentline + 1} of the code that raised an Error: {code_execution_exception}")
             print(f"Line that raised a problem: {lines[currentline]}")

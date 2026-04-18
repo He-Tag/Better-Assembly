@@ -5,11 +5,13 @@ callexec = 0
 looploops = 0
 loopinf = False
 currentline = -1
+mathoperations = ["ADD", "SUB", "MUL", "DIV", "EXP", "PRC"]
 with open('scriptfile.basm', 'r') as basmfile:
     lines = basmfile.readlines()
     while executingcode == True:
         try:
             result = 0
+            printresult = False
             if ifexec == True:
                 cmd = secondhalfcmd
                 signalcmd = cmd.split()[0]
@@ -38,56 +40,76 @@ with open('scriptfile.basm', 'r') as basmfile:
                 splitcmd = cmd.split()
             if signalcmd == "ADD":
                 try:
-                    for i in range(len(splitcmd) - 1):
-                        splitcmd[i + 1] = float(splitcmd[i + 1])
-                    for i in range(len(splitcmd) - 1):
-                        exec(f"result += splitcmd[i + 1]")
-                except ValueError:
-                    for i in range(len(splitcmd) - 1):
-                        exec(f"result += {splitcmd[i + 1]}")
+                    splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
+                    splitcmd[2] = float(globals()[f"{splitcmd[2]}"])
+                except:
+                    splitcmd[1] = float(splitcmd[1])
+                    splitcmd[2] = float(splitcmd[2])
+                exec("result = splitcmd[1] + splitcmd[2]")
+                printresult = True
             elif signalcmd == "SUB":
                 try:
-                    for i in range(len(splitcmd) - 1):
-                        splitcmd[i + 1] = float(splitcmd[i + 1])
-                    result = splitcmd[1]
-                    for i in range(len(splitcmd) - 2):
-                        exec(f"result -= splitcmd[i + 2]")
-                except ValueError:
-                    for i in range(len(splitcmd) - 2):
-                        exec(f"result = result + {splitcmd[i + 1]} - {splitcmd[i + 2]}")
+                    splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
+                    splitcmd[2] = float(globals()[f"{splitcmd[2]}"])
+                except:
+                    splitcmd[1] = float(splitcmd[1])
+                    splitcmd[2] = float(splitcmd[2])
+                exec("result = splitcmd[1] - splitcmd[2]")
+                printresult = True
             elif signalcmd == "MUL":
                 try:
-                    for i in range(len(splitcmd) - 1):
-                        splitcmd[i + 1] = float(splitcmd[i + 1])
-                    for i in range(len(splitcmd) - 1):
-                        exec(f"result *= splitcmd[i + 1]")
-                except ValueError:
-                    for i in range(len(splitcmd) - 1):
-                        exec(f"result *= {splitcmd[i + 1]}")
+                    splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
+                    splitcmd[2] = float(globals()[f"{splitcmd[2]}"])
+                except:
+                    splitcmd[1] = float(splitcmd[1])
+                    splitcmd[2] = float(splitcmd[2])
+                exec("result = splitcmd[1] * splitcmd[2]")
+                printresult = True
             elif signalcmd == "DIV":
                 try:
-                    for i in range(len(splitcmd) - 1):
-                        splitcmd[i + 1] = float(splitcmd[i + 1])
-                    result = splitcmd[1]
-                    for i in range(len(splitcmd) - 2):
-                        exec(f"result /= splitcmd[i + 2]")
-                except ValueError:
-                    for i in range(len(splitcmd) - 2):
-                        exec(f"result = result + {splitcmd[i + 1]} / {splitcmd[i + 2]}")
+                    splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
+                    splitcmd[2] = float(globals()[f"{splitcmd[2]}"])
+                except:
+                    splitcmd[1] = float(splitcmd[1])
+                    splitcmd[2] = float(splitcmd[2])
+                exec("result = splitcmd[1] / splitcmd[2]")
+                printresult = True
             elif signalcmd == "EXP":
                 try:
-                    for i in range(len(splitcmd) - 1):
-                        splitcmd[i + 1] = float(splitcmd[i + 1])
-                    result = splitcmd[1] ** splitcmd[2]
-                except ValueError:
-                    result = {splitcmd[1]} ** {splitcmd[2]}
+                    splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
+                    splitcmd[2] = float(globals()[f"{splitcmd[2]}"])
+                except:
+                    splitcmd[1] = float(splitcmd[1])
+                    splitcmd[2] = float(splitcmd[2])
+                exec("result = splitcmd[1] ** splitcmd[2]")
+                printresult = True
             elif signalcmd == "PRC":
                 try:
-                    for i in range(len(splitcmd) - 1):
-                        splitcmd[i + 1] = float(splitcmd[i + 1])
-                    result = (splitcmd[1] / 100) * splitcmd[2]
+                    splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
+                    splitcmd[2] = float(globals()[f"{splitcmd[2]}"])
                 except:
-                    result = ({splitcmd[1]} / 100) * {splitcmd[2]}
+                    splitcmd[1] = float(splitcmd[1])
+                    splitcmd[2] = float(splitcmd[2])
+                exec("result = (splitcmd[1] / 100) * splitcmd[2]")
+                printresult = True
+            elif signalcmd == "MOD":
+                try:
+                    splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
+                    splitcmd[2] = float(globals()[f"{splitcmd[2]}"])
+                except:
+                    splitcmd[1] = float(splitcmd[1])
+                    splitcmd[2] = float(splitcmd[2])
+                exec("result = splitcmd[1] % splitcmd[2]")
+                printresult = True
+            elif signalcmd == "FDV":
+                try:
+                    splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
+                    splitcmd[2] = float(globals()[f"{splitcmd[2]}"])
+                except:
+                    splitcmd[1] = float(splitcmd[1])
+                    splitcmd[2] = float(splitcmd[2])
+                exec("result = splitcmd[1] // splitcmd[2]")
+                printresult = True
             elif signalcmd == "VARSTR":
                 exec(f"{splitcmd[1]} = {splitcmd[2]}")
             elif signalcmd == "VARINT":
@@ -173,9 +195,10 @@ with open('scriptfile.basm', 'r') as basmfile:
                 globals()[f"{splitcmd[3]}"] = result
             except:
                 pass
-            try:
-                print(int(result))
-            except:
+            if printresult == True:
+                try:
+                    print(int(result))
+                except:
                     print(result)
         except Exception as code_execution_exception:
             print(f"The Program just tried to execute line {currentline + 1} of the code that raised an Error: {code_execution_exception}")

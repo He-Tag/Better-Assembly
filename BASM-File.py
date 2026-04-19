@@ -45,8 +45,8 @@ with open('scriptfile.basm', 'r') as basmfile:
                 except:
                     splitcmd[1] = float(splitcmd[1])
                     splitcmd[2] = float(splitcmd[2])
+                    printresult = True
                 exec("result = splitcmd[1] + splitcmd[2]")
-                printresult = True
             elif signalcmd == "SUB":
                 try:
                     splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
@@ -54,8 +54,8 @@ with open('scriptfile.basm', 'r') as basmfile:
                 except:
                     splitcmd[1] = float(splitcmd[1])
                     splitcmd[2] = float(splitcmd[2])
+                    printresult = True
                 exec("result = splitcmd[1] - splitcmd[2]")
-                printresult = True
             elif signalcmd == "MUL":
                 try:
                     splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
@@ -63,8 +63,8 @@ with open('scriptfile.basm', 'r') as basmfile:
                 except:
                     splitcmd[1] = float(splitcmd[1])
                     splitcmd[2] = float(splitcmd[2])
+                    printresult = True
                 exec("result = splitcmd[1] * splitcmd[2]")
-                printresult = True
             elif signalcmd == "DIV":
                 try:
                     splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
@@ -72,8 +72,8 @@ with open('scriptfile.basm', 'r') as basmfile:
                 except:
                     splitcmd[1] = float(splitcmd[1])
                     splitcmd[2] = float(splitcmd[2])
+                    printresult = True
                 exec("result = splitcmd[1] / splitcmd[2]")
-                printresult = True
             elif signalcmd == "EXP":
                 try:
                     splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
@@ -81,8 +81,8 @@ with open('scriptfile.basm', 'r') as basmfile:
                 except:
                     splitcmd[1] = float(splitcmd[1])
                     splitcmd[2] = float(splitcmd[2])
+                    printresult = True
                 exec("result = splitcmd[1] ** splitcmd[2]")
-                printresult = True
             elif signalcmd == "PRC":
                 try:
                     splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
@@ -90,8 +90,8 @@ with open('scriptfile.basm', 'r') as basmfile:
                 except:
                     splitcmd[1] = float(splitcmd[1])
                     splitcmd[2] = float(splitcmd[2])
+                    printresult = True
                 exec("result = (splitcmd[1] / 100) * splitcmd[2]")
-                printresult = True
             elif signalcmd == "MOD":
                 try:
                     splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
@@ -99,8 +99,8 @@ with open('scriptfile.basm', 'r') as basmfile:
                 except:
                     splitcmd[1] = float(splitcmd[1])
                     splitcmd[2] = float(splitcmd[2])
+                    printresult = True
                 exec("result = splitcmd[1] % splitcmd[2]")
-                printresult = True
             elif signalcmd == "FDV":
                 try:
                     splitcmd[1] = float(globals()[f"{splitcmd[1]}"])
@@ -108,8 +108,8 @@ with open('scriptfile.basm', 'r') as basmfile:
                 except:
                     splitcmd[1] = float(splitcmd[1])
                     splitcmd[2] = float(splitcmd[2])
+                    printresult = True
                 exec("result = splitcmd[1] // splitcmd[2]")
-                printresult = True
             elif signalcmd == "VARSTR":
                 exec(f"{splitcmd[1]} = {splitcmd[2]}")
             elif signalcmd == "VARINT":
@@ -117,9 +117,11 @@ with open('scriptfile.basm', 'r') as basmfile:
                 exec(f"{splitcmd[1]} = {splitcmd[2]}")
             elif signalcmd == "VARFLOAT":
                 splitcmd[2] = float(splitcmd[2])
+                printresult = True
                 exec(f"{splitcmd[1]} = {splitcmd[2]}")
             elif signalcmd == "VARREAD":
-                print(globals()[f"{splitcmd[1]}"])
+                result = globals()[f"{splitcmd[1]}"]
+                printresult = True
             elif signalcmd == "IF":
                 firsthalfcmd, secondhalfcmd = cmd.split(":", 1)
                 firsthalfcmd = firsthalfcmd.split()
@@ -163,10 +165,10 @@ with open('scriptfile.basm', 'r') as basmfile:
                         if globals()[f"{firsthalfcmd[1]}"] <= globals()[f"{firsthalfcmd[3]}"]:
                             ifexec = True
             elif signalcmd == "DEF":
-                executedcode = cmd.split(":", 1)[1]
+                executedcode = cmd.split(":", 1)[1].strip()
                 globals()[f"{splitcmd[1]}"] = executedcode.split(";")
             elif signalcmd == "CALL":
-                cmdlist = globals()[f"{splitcmd[1]}"]
+                cmdlist = globals()[f"{splitcmd[1]}"].copy()
                 callexec = len(cmdlist)
             elif signalcmd == "INC":
                 globals()[f"{splitcmd[1]}"] += 1
@@ -188,6 +190,8 @@ with open('scriptfile.basm', 'r') as basmfile:
                     globals()[f"{splitcmd[2]}"] = input(f"{splitcmd[1]}")
                 except:
                     globals()[f"{splitcmd[1]}"] = input()
+            elif signalcmd == "+":
+                pass
             elif signalcmd == "VARLST":
                 listvalues = splitcmd[2:]
                 globals()[f"{splitcmd[1]}"] = listvalues

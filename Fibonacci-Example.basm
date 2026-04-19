@@ -1,0 +1,4 @@
+VARINT a 0
+VARINT b 1
+DEF FN : VARREAD a; ADD b a b; VARREAD b; ADD a b a
+LOOP 10 : CALL FN
